@@ -18,7 +18,7 @@ void setup() {
   pinMode(ledVerdePin, OUTPUT);
   pinMode(ledRojoPin, OUTPUT);
   Serial.begin(9600);
-  Serial.println("CUPO MAXIMO: 10");
+  Serial.println("EL CUPO MAXIMO ES DE: 10 VEHICULOS");
 }
 
 void loop() {
@@ -28,9 +28,9 @@ void loop() {
   
   if(ingreso==1 && cupos_disponibles>0 && subida1==0){
     cupos_disponibles=cupos_disponibles-1;
-    Serial.print("Cupos: ");
+    Serial.print("CUPOS DISPONIBLES: ");
   	Serial.print(cupos_disponibles);
-  	Serial.print("\tRecaudo = $");
+  	Serial.print("\tSALDO= $");
   	Serial.print(valor_recaudado);
     Serial.println(" COP");
     delay(100);
@@ -40,9 +40,9 @@ void loop() {
   if(egreso==HIGH && cupos_disponibles<10 && subida2==0){
     cupos_disponibles=cupos_disponibles+1;
     valor_recaudado=valor_recaudado+5000;
-    Serial.print("Cupos: ");
+    Serial.print("CUPOS DISPONIBLES: ");
   	Serial.print(cupos_disponibles);
-  	Serial.print("\tRecaudo = $");
+  	Serial.print("\tSALDO = $");
   	Serial.print(valor_recaudado);
     Serial.println(" COP");
     delay(100);
