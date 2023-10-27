@@ -1,6 +1,6 @@
-const int sensorPin = A0;   // Pin para el potenciómetro
-int potenciometro, t1, t2, t3, t4; // Variables para el potenciómetro y tiempos
-float tension; // Variable para almacenar el voltaje (0.0 a 5.0)
+const int sensorPin = A0;   
+int potenciometro, t1, t2, t3, t4; 
+float tension; 
 int contadorRojo = 0, Rojoact = LOW;
 
 void setup() {
@@ -20,15 +20,11 @@ void loop() {
   potenciometro = analogRead(sensorPin); 
   tension = fmap(potenciometro, 0, 1023, 0.0, 5.0);
 
-    Serial.print("Tension: ");
-    Serial.print(tension);
-    Serial.print("\tBits: ");
-    Serial.println(potenciometro);
+    
+  t1 = (6000 / tension)*1;
+  t2 = (1000 / tension)*1;
+  t3 = (3000 / tension)*1;
 
-  t1 = (6000 / tension)*0.75;
-  t2 = (1000 / tension)*0.75;
-  t3 = (3000 / tension)*0.75;
-  t4 = (5000 / tension)*0.75;
 
 
   bool botonA, botonB;
@@ -57,33 +53,26 @@ void loop() {
 
      if(Rojoact == LOW){
     contadorRojo++;
-    Serial.print("\tBombillo Rojo: ");
+    Serial.print("\tEl LED Rojo ha encendido : ");
     Serial.println(contadorRojo);
   }
-   Serial.print("\tV Rojo: ");
-  Serial.print(t1);
-  Serial.print("\tV Amarillo: ");
-  Serial.print( t2);
-  Serial.print("\tV Verde: ");
-  Serial.println(t3);
+  
   }
 
   if (botonA == HIGH && botonB == LOW) {
     digitalWrite(6, HIGH);
-    delay(t4);
+    delay(500);
     digitalWrite(6, LOW);
-    delay(t4);
-    Serial.print("\tV Amarillo: ");
-    Serial.println( t4);
+    delay(500);
+    
   }
 
   if (botonA == HIGH && botonB == HIGH) {
     digitalWrite(6, HIGH);
-    delay(t4);
+    delay(500);
     digitalWrite(6, LOW);
-    delay(t4);
-    Serial.print("\tV Amarillo: ");
-    Serial.print( t4);
+    delay(500);
+    
   }
 
   if (botonA == LOW && botonB == HIGH) {
