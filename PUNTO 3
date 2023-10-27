@@ -1,47 +1,64 @@
-const int pinRojo = 7;
-const int pinAmarillo = 6;
-const int pinVerde = 5;
-const int pinBotonParo = 11;
-const int pinBotonMantenimiento = 10;
-
 void setup() {
-  pinMode(pinRojo, OUTPUT);
-  pinMode(pinAmarillo, OUTPUT);
-  pinMode(pinVerde, OUTPUT);
-  pinMode(pinBotonParo, INPUT_PULLUP);
-  pinMode(pinBotonMantenimiento, INPUT_PULLUP);
+
+  pinMode(7, OUTPUT);
+  pinMode(6, OUTPUT);
+  pinMode(5, OUTPUT);
+
+  pinMode(11, INPUT);
+  pinMode(10, INPUT);
+  pinMode(9, INPUT);
+  pinMode(8, INPUT);
 }
 
 void loop() {
   
-   digitalWrite(pinRojo, HIGH);
-    delay(5000);
-    digitalWrite(pinAmarillo, HIGH);
-    delay(1000);
-    digitalWrite(pinRojo, LOW);
-    digitalWrite(pinAmarillo, LOW);
-    digitalWrite(pinVerde, HIGH);
-    delay(3000);
-    digitalWrite(pinVerde, LOW);
-    digitalWrite(pinAmarillo, HIGH);
-    delay(1000);
-    digitalWrite(pinAmarillo, LOW);
-
+ bool botonA, botonB;
+  botonA = digitalRead(11);
+  botonB = digitalRead(10);
  
-  int tiempoAmarilloIntermitente = 15000;
-  unsigned long tiempoInicioAmarillo = millis();
+  if (botonA == LOW && botonB == LOW) {
+    digitalWrite(7, HIGH);
+  delay(5000);
 
-  while (millis() - tiempoInicioAmarillo < tiempoAmarilloIntermitente && digitalRead(pinBotonMantenimiento) == HIGH) {
-    digitalWrite(pinAmarillo, HIGH);
-    delay(275);
-    digitalWrite(pinAmarillo, LOW);
-    delay(275);
+  digitalWrite(6, HIGH);
+  delay(1000);
+  digitalWrite(7, LOW);
+
+  digitalWrite(5, HIGH);
+  delay(3000);
+  digitalWrite(6, LOW);
+  digitalWrite(5, LOW);
+
+    
+  }
+   
+
+  if (botonA == HIGH && botonB == LOW) {
+    digitalWrite(6, HIGH);
+    delay(500);
+    digitalWrite(6, LOW);
+    delay(500);
+    
   }
 
-  digitalWrite(pinAmarillo, LOW);
-
-  
-  while (digitalRead(pinBotonParo) == HIGH) {
-  
+  if (botonA == HIGH && botonB == HIGH) {
+    digitalWrite(6, HIGH);
+    delay(500);
+    digitalWrite(6, LOW);
+    delay(500);
+    
   }
+
+  if (botonA == LOW && botonB == HIGH) {
+    digitalWrite(5, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(7, LOW);
+  }
+ 
+ 
 }
+
+float fmap(float x, float in_min, float in_max, float out_min, float out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+
