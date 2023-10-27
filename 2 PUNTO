@@ -1,0 +1,18 @@
+const int potenciometroPin = A0;  // Pin para el potenciómetro
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int lecturaPotenciometro = analogRead(potenciometroPin);  // Leer el valor analógico del potenciómetro
+  float voltaje = (lecturaPotenciometro / 1023.0) * 5.0;  // Convertir el valor a voltaje (0-5V)
+
+  Serial.print("Valor del potenciómetro: ");
+  Serial.print(lecturaPotenciometro);
+  Serial.print("\tVoltaje: ");
+  Serial.print(voltaje, 2);  // Mostrar el voltaje con 2 decimales
+  Serial.println(" V");
+
+  delay(500);  // Esperar un breve periodo antes de la siguiente lectura
+}
