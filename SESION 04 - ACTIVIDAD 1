@@ -1,0 +1,28 @@
+ int ledPlaca = D4;
+ int ledAzul = D6;
+ int ledRojo = D5;
+ int pulsador = D3;
+
+void setup() {
+  pinMode(ledPlaca, OUTPUT);
+  pinMode(ledAzul, OUTPUT);
+  pinMode(ledRojo, OUTPUT);
+  pinMode(pulsador, INPUT);
+}
+
+void loop() {
+  digitalWrite(ledPlaca, HIGH);
+  digitalWrite(ledAzul, HIGH);
+  delay(500);
+
+  digitalWrite(ledPlaca, LOW);
+  digitalWrite(ledAzul, LOW);
+  delay(500);
+
+  if (digitalRead(pulsador) == LOW) {
+    digitalWrite(ledRojo, HIGH);
+  } else {
+    digitalWrite(ledRojo, LOW);
+  }
+}
+ 
