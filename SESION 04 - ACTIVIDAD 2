@@ -1,0 +1,70 @@
+long valor;
+ 
+
+const int ledAzul = D6;
+const int ledRojo = D5;
+const int ledPlaca = D4;
+const int valorBajo = 400;
+const int valorMedio = 800;
+const int valorMax = 1023;
+
+ void setup() {
+  
+   Serial.begin(9600);
+  
+  
+  Serial.println("Inicio de sketch - valores del potenciometro");
+ 
+  pinMode(ledAzul, OUTPUT);
+  pinMode(ledRojo, OUTPUT);
+  pinMode(ledPlaca, OUTPUT);
+
+}
+ 
+void loop() {
+
+  valor = analogRead(A0);
+ 
+  
+  Serial.print("El valor de el potenciometro es de = ");
+  Serial.println(valor);
+ 
+  if(valor >= 800 && valor <= 1023   )
+  {
+      digitalWrite(ledAzul, HIGH);
+      digitalWrite(ledRojo, LOW);
+      digitalWrite(ledPlaca, HIGH);
+
+  } 
+  
+  if(valor >= 1024 && valor == 1024   )
+  {
+      digitalWrite(ledAzul, LOW);
+      digitalWrite(ledRojo, HIGH);
+      digitalWrite(ledPlaca, HIGH);
+
+  } 
+
+  if(valor >= 400 && valor <= 800   )
+  {
+      digitalWrite(ledAzul, LOW);
+      digitalWrite(ledRojo, LOW);
+      digitalWrite(ledPlaca, LOW);
+      delay(100);
+       digitalWrite(ledPlaca, HIGH);
+      delay(100);
+
+  } 
+
+ if(valor >= 4 && valor <=400  )
+  {
+      digitalWrite(ledAzul, HIGH);
+      digitalWrite(ledRojo, HIGH);
+      digitalWrite(ledPlaca, LOW);
+      delay (200);
+      digitalWrite(ledAzul, LOW);
+      digitalWrite(ledRojo, LOW);
+      digitalWrite(ledPlaca, HIGH);
+      delay(200);
+       } 
+}
