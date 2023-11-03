@@ -1,0 +1,59 @@
+int ledRojo = D6;
+int ledAzul = D7;
+int ledVerde = D8;
+int R= 255;
+int G= 255;
+int B= 255;
+
+void setup() {
+  pinMode (ledRojo, OUTPUT);
+  pinMode (ledAzul, OUTPUT);
+  pinMode (ledVerde,OUTPUT);
+
+ 
+
+  
+  Serial.begin(115200); 
+  }
+
+void loop() {
+
+
+  if (Serial.available()) {
+    R = Serial.parseInt(); 
+     G = Serial.parseInt(); 
+      B = Serial.parseInt(); 
+    
+    if (R>255)
+    {
+      (R=255); }
+     
+      if (G>255)
+      {
+        (G=255);}
+      
+      if (B>255)
+      {
+        (B=255);}
+    
+    
+   if ( Serial.read () == '\n' )
+   
+    { 
+      Serial.print("ROJO ES = ");
+      Serial.println(R);
+      
+      Serial.print("VERDE ES = ");
+      Serial.println(G);
+      
+      Serial.print("AZUL ES = ");
+      Serial.println(B);
+    }
+  
+
+  analogWrite (ledRojo,R);
+  analogWrite (ledVerde,G);
+  analogWrite (ledAzul,B);
+  }
+
+}
