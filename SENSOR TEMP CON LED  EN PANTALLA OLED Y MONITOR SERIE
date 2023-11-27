@@ -1,0 +1,61 @@
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+#include <DHT.h>
+
+#define LED D8
+#define DHTPIN D2
+#define DHTTYPE DHT11
+#define ANCHO 128
+#define ALTO 64
+#define OLED_RESET 0
+#define i2c_dir 0x3C
+Adafruit_SSD1306 oled(ANCHO, ALTO, &Wire, OLED_RESET);
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup()
+{
+  Wire.begin();
+  Serial.begin(9600);
+  dht.begin();
+  oled.begin(SSD1306_SWITCHCAPVCC, i2c_dir);
+  pinMode (LED,OUTPUT);
+  oled.clearDisplay();
+  oled.display();
+  delay(100);
+}
+
+void loop()
+{
+  float humidity = dht.readHumidity();
+  float temperature = dht.readTemperature();
+
+  // Mostrar en el monitor serie
+  Serial.print("Humedad: ");
+  Serial.print(humidity);
+  Serial.print("%, Temperatura: ");
+  Serial.print(temperature);
+  Serial.println("°C");
+
+  // Mostrar en la pantalla OLED
+  oled.clearDisplay();
+  oled.setTextSize(1);
+  oled.setTextColor(WHITE);
+  oled.setCursor(35, 20);
+  oled.print("Humedad:");
+  oled.setCursor (35, 30); 
+  oled.print(humidity);
+  oled.print("%");
+  oled.setCursor(35,45);
+  oled.print("Tempe:");
+  oled.setCursor (35,55);
+  oled.print(temperature);
+  oled.print("C");
+  oled.display();
+
+  delay(1000);
+
+if (temperature >=26)
+{ digitalWrite (LED, HIGH);}
+else { digitalWrite (LED,LOW);}
+}
